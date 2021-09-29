@@ -124,17 +124,35 @@ const getByIdApi = async (id) => {
   }
 };
 const getbyIdDB = async (id) => {
-
-}
+  try {
+    const dataDB = await Recipe.findByPk(id, {
+      include: {
+        model: TypeOfDiet,
+        atributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    return dataDB;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 router.get("/:idReceta", async (req, res) => {
-  const {idReceta} = req.params
-  const dataByIdDB = await getbyIdDB(idReceta)
-  if(!dataByIdDB){
+  const { idReceta } = req.params;
+  const dataByIdDB = await getbyIdDB(idReceta);
+  if (!dataByIdDB) {
     const dataByIdApi = await getByIdApi(idReceta);
     if (dataByIdApi) res.send(dataByIdApi);
     else res.status(500).send("No data");
   } else res.send(dataByIdDB);
 });
+
+//--------------    - --  - - - - -   --  - - - - - - - - - -
+
+
+
 
 module.exports = router;

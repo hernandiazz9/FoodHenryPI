@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Punctuation: {
+    Score: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
@@ -29,6 +29,9 @@ module.exports = (sequelize) => {
     steps: {
       type: DataTypes.TEXT,
       allowNull: true,
+    },
+    image: {
+      type: DataTypes.STRING,
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,
