@@ -7,24 +7,32 @@ const router = require("express").Router();
 
 const recipeCreated = async (data) => {
   const {
-    name,
-    dishSumary,
-    Score,
-    healthyFoodLevel,
+    title,
+    summary,
+    spoonacularScore,
+    healthScore,
     steps,
-    createdInDb,
     image,
+    cusines,
+    aggregateLikes,
+    dishTypes,
+    readyInMinutes,
     diets,
+    createdInDb,
   } = data;
   try {
-    if (!name || !dishSumary) return;
+    if (!title || !summary) return;
     const created = await Recipe.create({
-      name,
-      dishSumary,
-      Score: Score || 0,
-      healthyFoodLevel: healthyFoodLevel || 0,
+      title,
+      summary,
+      spoonacularScore,
+      healthScore: healthScore || 0,
       steps,
       image,
+      cusines,
+      aggregateLikes,
+      dishTypes,
+      readyInMinutes,
       createdInDb,
     });
     const typeOfDietsDB = await TypeOfDiet.findAll({
