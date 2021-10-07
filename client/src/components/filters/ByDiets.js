@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { filterRecipeAction, filterReset } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const Diets = ({ diets }) => {
+const ByDiets = ({ diets }) => {
   const dispatch = useDispatch();
   const [dietsFilter, setDietsFilter] = useState([]);
 
@@ -41,4 +41,4 @@ const Diets = ({ diets }) => {
   );
 };
 
-export default Diets;
+export default ByDiets;

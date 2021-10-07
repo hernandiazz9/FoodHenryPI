@@ -25,14 +25,14 @@ const recipeCreated = async (data) => {
     const created = await Recipe.create({
       title,
       summary,
-      spoonacularScore,
-      healthScore: healthScore || 0,
+      spoonacularScore: parseInt(spoonacularScore),
+      healthScore: parseInt(healthScore) || 0,
       steps,
       image,
       cusines,
-      aggregateLikes,
+      likes: parseInt(aggregateLikes),
       dishTypes,
-      readyInMinutes,
+      readyInMinutes: parseInt(readyInMinutes),
       createdInDb,
     });
     const typeOfDietsDB = await TypeOfDiet.findAll({

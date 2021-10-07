@@ -41,7 +41,7 @@ const Card = ({ recipe }) => {
                  recipe.likes  
             }</span>
           </div>
-          <img
+          <img 
             src={image}
             alt=""
             className="card-media"

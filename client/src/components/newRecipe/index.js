@@ -1,41 +1,127 @@
-
-import {useEffect, useState} from 'react';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createRecipeAction } from "../../actions";
 
 import Header from "../layout/Header";
-import Side from "../layout/Side";
+
+import InputDiets from "./InputDiets";
 
 const NewRecipe = () => {
-  const submit = () => {};
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState({
+    title: "",
+    summary: "",
+    spoonacularScore: 0,
+    healthScore: 0,
+    steps: ["1", "2"],
+    image: "",
+    cusines: [],
+    aggregateLikes: 0,
+    dishTypes: ["side dish", "algo mas"],
+    readyInMinutes: 0,
+    diets: ["vegan", "primal"],
+    createdInDb: true,
+  });
+  const {title, summary, spoonacularScore,healthScore,steps, image,readyInMinutes} = form;
+
+  const submit = (e) => {
+    e.preventDefault();
+    dispatch(createRecipeAction(form));
+  };
+
+  const onChange = (e) => {
+    setForm((form) => ({
+      ...form,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div>
       <Header />
+      <h1>Write your Recipe</h1>
       <form onSubmit={submit}>
         <div>
-          <label htmlFor="">Recipe Name </label>
-          <input 
-            type="text" 
-            
-         />
+          <label>
+            Recipe Name 
+            <input
+              type="text" size="24" required name="title"
+              onChange={onChange}
+              value={title}
+              placeholder=""
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="">dishSumary </label>
-          <input type="text" />
+          <label>
+            Dish Sumary
+            <textarea 
+              onChange={onChange}
+              name={summary} cols="20" rows="3" minLength="5"
+              maxLength="500" required
+             />   
+          </label>
         </div>
         <div>
-          <label htmlFor="">Score </label>
-          <input type="text" />
+          <label>
+            Score
+            <input
+              type="number" step="1" value={spoonacularScore} min="0" 
+              max="100" required
+              name="spoonacularScore"
+              onChange={onChange}
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="">healthyFoodLevel </label>
-          <input type="text" />
+          <label>
+            healthy Food Level
+            <input
+              type="number" step="1" value={healthScore} min="0" max="100" 
+              name="healthScore"
+              onChange={onChange}
+              placeholder=""
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="">steps </label>
-          <input type="text" />
+          <label>
+            Cooking Time
+            <input
+              type="number" step="1" value={readyInMinutes} min="0" max="100"
+              name='readyInMinutes'
+              onChange={onChange}
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="">image </label>
-          <input type="text" />
+          <label>
+            steps
+            <input
+              type="text"
+              name="steps"
+              onChange={onChange}
+              placeholder=""
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            image
+            <input
+              type="file"
+              name="image"
+              onChange={onChange}
+              placeholder=""
+            />
+          </label>
+        </div>
+        <InputDiets setForm={setForm} />
+        <div>
+          <label>
+            submit
+            <input type="submit" />
+          </label>
         </div>
       </form>
     </div>
@@ -43,3 +129,29 @@ const NewRecipe = () => {
 };
 
 export default NewRecipe;
+
+// title,
+// summary,
+// spoonacularScore,
+// healthScore,
+// steps,
+// image,
+// cusines,
+// aggregateLikes,
+// dishTypes,
+// readyInMinutes,
+// diets,
+// createdInDb,
+// {
+//     "title": "una zapi joyasa  ",
+//     "summary":"algo",
+//     "spoonacularScore":"100",
+//     "healthScore":"100",
+//     "steps":["1","2"],
+//     "image":"",
+//     "cusines":["q","w"],
+//     "aggregateLikes":"34",
+//     "dishTypes":["side dish","algo mas"],
+//     "readyInMinutes":"45",
+//     "diets":["vegan","primal"]
+// }

@@ -24,9 +24,17 @@ const getDataDB = async () => {
 const getDataAPI = async () => {
   try {
     const api = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.apiKey}&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.apiKey}&addRecipeInformation=true&number=15`
     );
     const data = api.data.results.map((e) => {
+      const newDiets = [];
+      if (e.vegan) e.diets.includes("vegan") ? null : newDiets.push("vegan");
+      if (e.vegetarian)
+        e.diets.includes("vegetarian") ? null : newDiets.push("vegetarian");
+      if (e.glutenFree)
+        e.diets.includes("gluten free") ? null : newDiets.push("gluten free");
+      if (e.dairyFree)
+        e.diets.includes("dairy free") ? null : newDiets.push("dairy free");
       return {
         vegetarian: e.vegetarian,
         vegan: e.vegan,
@@ -37,15 +45,14 @@ const getDataAPI = async () => {
         summary: e.summary,
         spoonacularScore: e.spoonacularScore,
         healthScore: e.healthScore,
-        steps: e.analyzedInstructions.map(e=>e.steps),
+        steps: e.analyzedInstructions.map((e) => e.steps),
         image: e.image,
         cusines: e.cuisines,
         aggregateLikes: e.aggregateLikes,
         dishTypes: e.dishTypes,
         readyInMinutes: e.readyInMinutes,
-        diets: e.diets,
-        createdInDb : false
-
+        diets: e.diets.concat(newDiets),
+        createdInDb: false,
       };
     });
     return data;
@@ -73,6 +80,14 @@ const searchByNameApi = async (name) => {
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.apiKey}&addRecipeInformation=true&titleMatch=${name}`
     );
     const data = api.data.results.map((e) => {
+      const newDiets = [];
+      if (e.vegan) e.diets.includes("vegan") ? null : newDiets.push("vegan");
+      if (e.vegetarian)
+        e.diets.includes("vegetarian") ? null : newDiets.push("vegetarian");
+      if (e.glutenFree)
+        e.diets.includes("gluten free") ? null : newDiets.push("gluten free");
+      if (e.dairyFree)
+        e.diets.includes("dairy free") ? null : newDiets.push("dairy free");
       return {
         vegetarian: e.vegetarian,
         vegan: e.vegan,
@@ -83,14 +98,14 @@ const searchByNameApi = async (name) => {
         summary: e.summary,
         spoonacularScore: e.spoonacularScore,
         healthScore: e.healthScore,
-        steps: e.steps,
+        steps: e.analyzedInstructions.map((e) => e.steps),
         image: e.image,
-        cusines: e.cusines,
+        cusines: e.cuisines,
         aggregateLikes: e.aggregateLikes,
         dishTypes: e.dishTypes,
         readyInMinutes: e.readyInMinutes,
-        diets: e.diets,
-        createdInDb : false
+        diets: e.diets.concat(newDiets),
+        createdInDb: false,
       };
     });
     return data;
@@ -133,26 +148,33 @@ const getByIdApi = async (id) => {
     const apiGetById = await axios.get(
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.apiKey}`
     );
-    const { data } = apiGetById;
+    const e = apiGetById.data;
+    const newDiets = [];
+    if (e.vegan) e.diets.includes("vegan") ? null : newDiets.push("vegan");
+    if (e.vegetarian)
+      e.diets.includes("vegetarian") ? null : newDiets.push("vegetarian");
+    if (e.glutenFree)
+      e.diets.includes("gluten free") ? null : newDiets.push("gluten free");
+    if (e.dairyFree)
+      e.diets.includes("dairy free") ? null : newDiets.push("dairy free");
     const obj = {
-      vegetarian: data.vegetarian,
-      vegan: data.vegan,
-      glutenFree: data.glutenFree,
-      dairyFree: data.dairyFree,
-      title: data.title,
-      id: data.id,
-      summary: data.summary,
-      spoonacularScore: data.spoonacularScore,
-      healthScore: data.healthScore,
-      steps: data.steps,
-      image: data.image,
-      cusines: data.cusines,
-      aggregateLikes: data.aggregateLikes,
-      dishTypes: data.dishTypes,
-      readyInMinutes: data.readyInMinutes,
-      diets: data.diets,
-      createdInDb : false
-
+      vegetarian: e.vegetarian,
+      vegan: e.vegan,
+      glutenFree: e.glutenFree,
+      dairyFree: e.dairyFree,
+      title: e.title,
+      id: e.id,
+      summary: e.summary,
+      spoonacularScore: e.spoonacularScore,
+      healthScore: e.healthScore,
+      steps: e.analyzedInstructions.map((e) => e.steps),
+      image: e.image,
+      cusines: e.cuisines,
+      aggregateLikes: e.aggregateLikes,
+      dishTypes: e.dishTypes,
+      readyInMinutes: e.readyInMinutes,
+      diets: e.diets.concat(newDiets),
+      createdInDb: false,
     };
     return obj;
   } catch (error) {

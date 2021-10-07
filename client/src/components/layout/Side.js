@@ -1,8 +1,13 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { getFiltersAction } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import Diets from "../filters/Diets";
+import ByDiets from "../filters/ByDiets";
+import ByName from "../filters/ByName";
+import ByScore from "../filters/ByScore";
+import ByHealtScore from "../filters/ByHealtScore";
+import ByLikes from "../filters/ByLikes";
+import ByTimePreparation from "../filters/ByTimePreparation";
 
 const Container = styled.div`
   position: sticky;
@@ -19,7 +24,12 @@ const { diets } = useSelector(state => state)
 
   return (
     <Container>
-      <Diets  diets={diets}  />
+      <ByDiets  diets={diets}  />
+      <ByName />
+      <ByScore />
+      <ByHealtScore />
+      <ByLikes />
+      <ByTimePreparation />
     </Container>
   );
 };

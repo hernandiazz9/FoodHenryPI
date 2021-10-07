@@ -32,7 +32,7 @@ const axios = require("axios");
 // };
 const getTypeOfDiets = async () => {
   const allDiets = await TypeOfDiet.findAll();
-  console.log(allDiets);
+  // console.log(allDiets);
   return allDiets;
 };
 router.get("/", async (req, res) => {

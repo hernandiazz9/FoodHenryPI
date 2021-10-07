@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 
 import Header from "./layout/Header";
 import Side from "./layout/Side";
-// import Cards from "./Cards";
 import Footer from "./Footer";
-import Paginator from "./Pagination/App";
 import styled from "styled-components";
+import Paginator from "./paginator";
 
 import { useDispatch } from "react-redux";
 import { getRecipeAction } from "../actions";
-import App from "./pagination2/App";
+
 
 const Container = styled.div`
   .grid {
@@ -88,8 +86,7 @@ const Home = () => {
         </aside>
         <main className="page-main">
           <div className="content">
-            {/* <Paginator /> */}
-            <App/>
+            <Paginator />
           </div>
         </main>
         <footer className="page-footer">

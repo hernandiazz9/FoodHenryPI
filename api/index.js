@@ -36,6 +36,7 @@ conn.sync({ force: false }).then(() => {
       "paleolithic",
       "primal",
       "whole 30",
+      "dairy free"
     ];
 
     const addTypeOfDiets = () => {

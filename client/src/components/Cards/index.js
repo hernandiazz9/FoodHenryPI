@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Card from "./Card";
 
-const Cards = ({currentTableData}) => {
+const Cards = ({currentRecipes}) => {
+  console.log(currentRecipes,'currentRecipes');
 
-  return currentTableData.length > 0 ? (
+  return currentRecipes.length > 0 ? (
     <div>
-      {currentTableData.map((recipe) => (
+      {currentRecipes.map((recipe) => (
         <div key={recipe.id}>
           <Card recipe={recipe} />
         </div>

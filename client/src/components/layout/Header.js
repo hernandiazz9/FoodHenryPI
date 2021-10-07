@@ -1,6 +1,6 @@
 import SearchBar from "../searchBar";
 // import Favourite from "../filters";
-import Diets from '../filters/Diets'
+import Diets from '../filters/ByDiets'
 import {Link} from 'react-router-dom'
 
 
