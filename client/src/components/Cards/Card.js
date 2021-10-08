@@ -1,55 +1,50 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./card.css";
 
-const Container = styled.div`
- 
-`;
+const Container = styled.div``;
 const Card = ({ recipe }) => {
-  const { aggregateLikes,cusines, diets,  dishTypes, healthScore, image, title, createdInDb } = recipe;
-  console.log(recipe, '/recipesssssss');
-  return recipe? (
-      <div className="card-container">
-        <div className="card u-clearfix">
-          <div className="card-body">
-            <span className="card-number card-circle subtle">{healthScore}</span>
-            <span className="card-author subtle"> Health Score</span>
-            <h2 className="card-title">{title}</h2>
-            <span className="card-description subtle">
-              {dishTypes&&dishTypes.map((type,i)=>(
-                 <span key={i}>{type}  </span>
-              ))}
-              |
-              {cusines&&cusines.map((e,i)=>(
-                 <span key={i}> {e}  </span>
-              ))}
-              |
-              {
-                !createdInDb?
-                diets.map((e,i)=>(
-                 <span key={i}> {e} </span>
-              )):
-              recipe.TypeOfDiets.map((e,i)=>(
-                <span key={i}> {e.name} </span>
-             ))
-            }
-            </span>
-            <div className="card-read"><span>Read</span></div>
-            <span className="card-tag card-circle subtle"> Likes -   
-            {
-              !createdInDb?
-                 aggregateLikes:
-                 recipe.likes  
-            }</span>
+  const {
+    aggregateLikes,
+    cusines,
+    diets,
+    dishTypes,
+    healthScore,
+    image,
+    title,
+    createdInDb,
+    id
+  } = recipe;
+  console.log(recipe, "/recipesssssss");
+  return recipe ? (
+    <div className="card-container">
+      <div className="card u-clearfix">
+        <div className="card-body">
+          <span className="card-author subtle"> 
+          {healthScore} &#10084; &emsp; &emsp; &#128077;
+          {!createdInDb ? aggregateLikes : recipe.likes}  </span>
+          <h2 className="card-title">{title}</h2>
+          <span className="card-description subtle">
+            {dishTypes && !createdInDb &&
+              dishTypes.map((type, i) => <span key={i}>{type} </span>)}
+            |{cusines&& !createdInDb && cusines.map((e, i) => <span key={i}> {e} </span>)}|
+            {!createdInDb
+              ? diets.map((e, i) => <span key={i}> {e} </span>)
+              : recipe.TypeOfDiets.map((e, i) => (
+                  <span key={i}> {e.name} </span>
+                ))}
+          </span>
+          <div className="card-read">
+            <Link to={`/recipes/${recipe.id}`} >Read</Link>
           </div>
-          <img 
-            src={image}
-            alt=""
-            className="card-media"
-          />
         </div>
-        <div className="card-shadow"></div>
+        <img src={image} alt="" className="card-media" />
       </div>
-  ):'cargando...'
+      <div className="card-shadow"></div>
+    </div>
+  ) : (
+    "cargando..."
+  );
 };
 
 export default Card;

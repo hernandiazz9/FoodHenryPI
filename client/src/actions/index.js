@@ -15,7 +15,10 @@ import {
   ORDER_BY_SCORE,
   ORDER_BY_HEALTH_SCORE,
   ORDER_BY_LIKES,
-  ORDER_BY_TIME_PREPARATION
+  ORDER_BY_TIME_PREPARATION,
+  GET_BY_ID_ERROR,
+  GET_BY_ID_OKEY,
+  GET_BY_ID
 } from "../types";
 
 export const getRecipeAction = () => {
@@ -150,3 +153,29 @@ export const createRecipeAction = (data) => {
     }
   };
 };
+
+
+export const getRecipeByIdAction = (id) => {
+  return async (dispatch) => {
+    dispatch(getRecipeById());
+    try {
+      const recipes = await clienteAxios.get(`/recipes/${id}`);
+      // console.log(recipes.data, 'dataaa');
+      dispatch(getRecipeByIdOKEY(recipes.data));
+    } catch (error) {
+      dispatch(getRecipeByIdError(error.data));
+    }
+  };
+};
+const getRecipeById = () => ({
+  type: GET_BY_ID,
+  payload: true,
+});
+const getRecipeByIdOKEY = (recipes) => ({
+  type: GET_BY_ID_OKEY,
+  payload: recipes,
+});
+const getRecipeByIdError = (error) => ({
+  type: GET_BY_ID_ERROR,
+  payload: error,
+});

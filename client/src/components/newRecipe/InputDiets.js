@@ -9,19 +9,23 @@ const InputDiets = ({ setForm }) => {
   useEffect(() => {
     dispatch(getFiltersAction());
   }, []);
+  useEffect(() => {
+    setForm((form) => ({
+      ...form,
+      diets: dietsSelected,
+    }));
+  }, [dietsSelected]);
 
   const onChange = (e) => {
-    setDietsSelected(
-      (r) => {
-        if (!r.length > 0) return [e.target.value];
-        if (!dietsSelected.includes(e.target.value)) {
-          return [...r, e.target.value];
-        } else {
-          const filter = r.filter((c) => c !== e.target.value);
-          return filter;
-        }
+    setDietsSelected((r) => {
+      if (!r.length > 0) return [e.target.value];
+      if (!dietsSelected.includes(e.target.value)) {
+        return [...r, e.target.value];
+      } else {
+        const filter = r.filter((c) => c !== e.target.value);
+        return filter;
       }
-      );
+    });
   };
   return (
     <div>
@@ -39,3 +43,11 @@ const InputDiets = ({ setForm }) => {
 };
 
 export default InputDiets;
+
+// ,
+// () =>
+// setForm((form) => ({
+//   ...form,
+//   diets: dietsSelected,
+// }))
+// );

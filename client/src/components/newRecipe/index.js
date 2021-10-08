@@ -1,130 +1,96 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createRecipeAction } from "../../actions";
+import styled from "styled-components";
 
 import Header from "../layout/Header";
-
 import InputDiets from "./InputDiets";
+import InputSteps from "./InputSteps";
+import Form from "./Form";
+import Footer from "../Footer";
+
+const Container = styled.div`
+  .grid {
+    display: grid;
+    margin: 0 auto;
+    max-width: 95%;
+    height: 100vh;
+    grid-template-columns: auto ;
+    grid-template-rows: 40px 50px auto auto;
+    grid-template-areas:
+      "header "
+      "head "
+      "main  "
+      "footer ";
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-areas:
+        "header header"
+        "head head"
+        "rigthbar rigthbar"
+        "main main"
+        "footer footer";
+    }
+  }
+  .page-header {
+    grid-area: header;
+  }
+  .page-head {
+    grid-area: head;
+  }
+  .page-rigthbar {
+    grid-area: rigthbar;
+    background-color: #e6e3dc;
+    border-radius: 12px;
+  }
+  .page-main {
+    grid-area: main;
+    background-color: #e6e3dc;
+    border-radius: 12px;
+  }
+  .page-footer {
+    grid-area: footer;
+    background-color: #e6e3dc;
+    border-radius: 12px;
+  }
+  .content {
+    /* color: #242424; */
+    /* background-color: black; */
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+  }
+  .form {
+    text-align: left;
+  }
+`;
 
 const NewRecipe = () => {
-  const dispatch = useDispatch();
-
-  const [form, setForm] = useState({
-    title: "",
-    summary: "",
-    spoonacularScore: 0,
-    healthScore: 0,
-    steps: ["1", "2"],
-    image: "",
-    cusines: [],
-    aggregateLikes: 0,
-    dishTypes: ["side dish", "algo mas"],
-    readyInMinutes: 0,
-    diets: ["vegan", "primal"],
-    createdInDb: true,
-  });
-  const {title, summary, spoonacularScore,healthScore,steps, image,readyInMinutes} = form;
-
-  const submit = (e) => {
-    e.preventDefault();
-    dispatch(createRecipeAction(form));
-  };
-
-  const onChange = (e) => {
-    setForm((form) => ({
-      ...form,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  
   return (
-    <div>
-      <Header />
-      <h1>Write your Recipe</h1>
-      <form onSubmit={submit}>
-        <div>
-          <label>
-            Recipe Name 
-            <input
-              type="text" size="24" required name="title"
-              onChange={onChange}
-              value={title}
-              placeholder=""
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Dish Sumary
-            <textarea 
-              onChange={onChange}
-              name={summary} cols="20" rows="3" minLength="5"
-              maxLength="500" required
-             />   
-          </label>
-        </div>
-        <div>
-          <label>
-            Score
-            <input
-              type="number" step="1" value={spoonacularScore} min="0" 
-              max="100" required
-              name="spoonacularScore"
-              onChange={onChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            healthy Food Level
-            <input
-              type="number" step="1" value={healthScore} min="0" max="100" 
-              name="healthScore"
-              onChange={onChange}
-              placeholder=""
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Cooking Time
-            <input
-              type="number" step="1" value={readyInMinutes} min="0" max="100"
-              name='readyInMinutes'
-              onChange={onChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            steps
-            <input
-              type="text"
-              name="steps"
-              onChange={onChange}
-              placeholder=""
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            image
-            <input
-              type="file"
-              name="image"
-              onChange={onChange}
-              placeholder=""
-            />
-          </label>
-        </div>
-        <InputDiets setForm={setForm} />
-        <div>
-          <label>
-            submit
-            <input type="submit" />
-          </label>
-        </div>
-      </form>
-    </div>
+    <Container>
+      <div className="grid">
+        <header className="page-header">
+          <div className="content">
+            <Header />
+          </div>
+        </header>
+        <h1 className="page-head">Write your Recipe</h1>
+        <main class="page-main">
+          <div class="content form">
+            <Form  />
+          </div>
+        </main>
+        <footer className="page-footer">
+          <div className="content">
+            <Footer />
+          </div>
+        </footer>
+      </div>
+    </Container>
   );
 };
 
@@ -142,7 +108,7 @@ export default NewRecipe;
 // readyInMinutes,
 // diets,
 // createdInDb,
-// {
+
 //     "title": "una zapi joyasa  ",
 //     "summary":"algo",
 //     "spoonacularScore":"100",

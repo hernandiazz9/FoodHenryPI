@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 
-const InputSteps = ({ setForm }) => {
-  const [steps, setSteps] = useState([]);
-  const [step, setStep] = useState("");
+const InputIngredients = ({ setForm }) => {
+  const [ingredients, setIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState("");
 
   const onchange = (e) => {
-    setStep(e.target.value);
+    setIngredient(e.target.value);
   };
   const onclick = (e) => {
     e.preventDefault();
-    setSteps((i) => [...i, step]);
+    setIngredients((i) => [...i, ingredient]);
   };
   useEffect(() => {
     setForm((e) => ({
       ...e,
-      steps,
+      ingredients,
     }));
-  }, [steps]);
+  }, [ingredients]);
   return (
     <>
       <input onChange={onchange} type="text" />
@@ -27,4 +27,4 @@ const InputSteps = ({ setForm }) => {
   );
 };
 
-export default InputSteps;
+export default InputIngredients;

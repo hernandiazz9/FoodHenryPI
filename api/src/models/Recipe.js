@@ -33,15 +33,9 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
     },
-    cusines: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
-    },
     likes: {
       type: DataTypes.STRING,
       defaultValue:0,
-    },
-    dishTypes: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
     },
     readyInMinutes: {
       type: DataTypes.STRING,

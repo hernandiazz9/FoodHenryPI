@@ -11,10 +11,13 @@ import {
   GET_FILTER_ERROR,
   FILTER_RECIPES_RESET,
   ORDER_BY_NAME,
-  ORDER_BY_SCORE, 
+  ORDER_BY_SCORE,
   ORDER_BY_HEALTH_SCORE,
   ORDER_BY_LIKES,
-  ORDER_BY_TIME_PREPARATION
+  ORDER_BY_TIME_PREPARATION,
+  GET_BY_ID_ERROR,
+  GET_BY_ID_OKEY,
+  GET_BY_ID,
 } from "../types";
 
 const initialState = {
@@ -23,6 +26,7 @@ const initialState = {
   loading: false,
   error: "",
   diets: [],
+  recipeId:{}
 };
 
 const todos = (state = initialState, action) => {
@@ -73,51 +77,62 @@ const todos = (state = initialState, action) => {
     case ORDER_BY_NAME:
       return {
         ...state,
-        allRecipe:[ 
-           ...state.allRecipe.sort((a, b) => {
+        allRecipe: [
+          ...state.allRecipe.sort((a, b) => {
             let fa = a.title.toLowerCase(),
-            fb = b.title.toLowerCase();
-            if (fa < fb) return action.payload? -1 : 1;
-            if (fa > fb)  return  action.payload? 1 : -1;
+              fb = b.title.toLowerCase();
+            if (fa < fb) return action.payload ? -1 : 1;
+            if (fa > fb) return action.payload ? 1 : -1;
             return 0;
-          })],
-      }
+          }),
+        ],
+      };
     case ORDER_BY_SCORE:
       return {
         ...state,
-        allRecipe:[ 
-           ...state.allRecipe.sort((a, b) => {
-             if(action.payload)return a.spoonacularScore - b.spoonacularScore
-             return b.spoonacularScore - a.spoonacularScore
-          })],
-      }
+        allRecipe: [
+          ...state.allRecipe.sort((a, b) => {
+            if (action.payload) return a.spoonacularScore - b.spoonacularScore;
+            return b.spoonacularScore - a.spoonacularScore;
+          }),
+        ],
+      };
     case ORDER_BY_HEALTH_SCORE:
       return {
         ...state,
-        allRecipe:[ 
-           ...state.allRecipe.sort((a, b) => {
-             if(action.payload)return a.healthScore - b.healthScore
-             return b.healthScore - a.healthScore
-          })],
-      }
+        allRecipe: [
+          ...state.allRecipe.sort((a, b) => {
+            if (action.payload) return a.healthScore - b.healthScore;
+            return b.healthScore - a.healthScore;
+          }),
+        ],
+      };
     case ORDER_BY_LIKES:
       return {
         ...state,
-        allRecipe:[ 
-           ...state.allRecipe.sort((a, b) => {
-             if(action.payload)return a.aggregateLikes - b.aggregateLikes
-             return b.aggregateLikes - a.aggregateLikes
-          })],
-      }
+        allRecipe: [
+          ...state.allRecipe.sort((a, b) => {
+            if (action.payload) return a.aggregateLikes - b.aggregateLikes;
+            return b.aggregateLikes - a.aggregateLikes;
+          }),
+        ],
+      };
     case ORDER_BY_TIME_PREPARATION:
       return {
         ...state,
-        allRecipe:[ 
-           ...state.allRecipe.sort((a, b) => {
-             if(action.payload)return a.readyInMinutes - b.readyInMinutes
-             return b.readyInMinutes - a.readyInMinutes
-          })],
-      }
+        allRecipe: [
+          ...state.allRecipe.sort((a, b) => {
+            if (action.payload) return a.readyInMinutes - b.readyInMinutes;
+            return b.readyInMinutes - a.readyInMinutes;
+          }),
+        ],
+      };
+    case GET_BY_ID:
+      return { ...state, loading: action.payload };
+    case GET_BY_ID_OKEY:
+      return { ...state, loading: false, recipeId: action.payload };
+    case GET_BY_ID_ERROR:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

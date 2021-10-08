@@ -38,6 +38,7 @@ const Header = () => {
       <nav className="menu-bar">
         <div className="group">
           <Link to='/home' className="item title">LOGO</Link>
+          <Link to='/recipe' className="item title">recipe</Link>
         </div>
         <div className="group">
           <a className="item">

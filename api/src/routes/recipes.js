@@ -200,6 +200,7 @@ const getbyIdDB = async (id) => {
 
 router.get("/:idReceta", async (req, res) => {
   const { idReceta } = req.params;
+  console.log(idReceta,'idddddd////');
   const dataByIdDB = await getbyIdDB(idReceta);
   if (!dataByIdDB) {
     const dataByIdApi = await getByIdApi(idReceta);
