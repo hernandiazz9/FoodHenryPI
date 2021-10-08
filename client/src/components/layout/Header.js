@@ -8,13 +8,12 @@ import styled from "styled-components";
 
 const Container = styled.div`
   .menu-bar {
-    background-color: #1988f7;
+    background-color: #e6e3dc;
     display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
+    justify-content: space-around;
   }
   .item {
-    color: white;
+    color: #000000;
     background-color: transparent;
     font-size: 18px;
     display: inline-block;
@@ -23,7 +22,6 @@ const Container = styled.div`
   }
   .item.title {
     font-weight: 600;
-    padding-left: 60px;
     text-decoration: none;
   }
   .item:hover {
@@ -37,8 +35,8 @@ const Header = () => {
     <Container>
       <nav className="menu-bar">
         <div className="group">
-          <Link to='/home' className="item title">LOGO</Link>
-          <Link to='/recipe' className="item title">recipe</Link>
+          <Link to='/home' className="item title">RECIPEapp</Link>
+          <Link to='/recipe' className="item title">Create a Recipe</Link>
         </div>
         <div className="group">
           <a className="item">

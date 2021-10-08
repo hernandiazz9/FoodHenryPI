@@ -20,7 +20,7 @@ const SearchBar = () => {
     <div>
       <form onSubmit={onSubmit}>
         <input type="submit" value="search" />
-        <input type="search" onChange={onChange} placeholder='Search' size='20' name={search} />
+        <input type="search" onChange={onChange} placeholder='Search' size='15' name={search} />
       </form>
     </div>
   );

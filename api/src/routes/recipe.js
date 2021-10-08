@@ -12,6 +12,7 @@ const recipeCreated = async (data) => {
     spoonacularScore,
     healthScore,
     steps,
+    ingredients,
     image,
     aggregateLikes,
     readyInMinutes,
@@ -23,6 +24,7 @@ const recipeCreated = async (data) => {
     const created = await Recipe.create({
       title,
       summary,
+      ingredients,
       spoonacularScore: parseInt(spoonacularScore)||0,
       healthScore: parseInt(healthScore) || 0,
       steps,

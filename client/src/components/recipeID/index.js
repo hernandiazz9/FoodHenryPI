@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeByIdAction } from "../../actions";
 import { useParams } from "react-router-dom";
@@ -67,10 +67,9 @@ const Container = styled.div`
   }
   .titulo {
   }
-  .img{
-      position: sticky;
-      top: 10px;
-
+  .img {
+    position: sticky;
+    top: 10px;
   }
 `;
 
@@ -81,7 +80,8 @@ const RecipeId = () => {
   useEffect(() => {
     dispatch(getRecipeByIdAction(id));
   }, []);
-
+  const [ingredients, setIngredients] = useState([]);
+  const [stepsAll, setStepsAll] = useState([]);
   const {
     image,
     healthScore,
@@ -94,17 +94,27 @@ const RecipeId = () => {
     createdInDb,
   } = recipeId;
 
-  console.log(steps[0],'stepssteps');
-  if(steps&&!createdInDb&&steps.length>0){
+  useEffect(() => {
+    if (steps && !createdInDb && steps.length > 0) {
+      const ingred = steps[0].map((e) => e.ingredients);
+      let getIngred = ingred.flat();
+      let hash = {};
+      getIngred = getIngred.filter(function (current) {
+        var exists = !hash[current.id];
+        hash[current.id] = true;
+        return exists;
+      });
+      const ingreds = getIngred.map((e) => e.name);
+      setIngredients(ingreds);
+      const allStep = steps[0].map((e) => e.step);
+      setStepsAll(allStep);
+    }
+  }, [recipeId]);
 
-  }
-  {!createdInDb&&steps&&steps.length>0&&steps[0].map(s=>{
-   s.ingredients.map(i=>(
-      <p key={i.id}> {i.name} </p>
-   ))
-   }) }
+  console.log(recipeId, "/recipeId");
 
-  return recipeId ? (
+  // console.log(recipeId.TypeOfDiets);
+  return Object.keys(recipeId).length > 0 ? (
     <Container>
       <div className="grid">
         <header className="page-header">
@@ -116,32 +126,56 @@ const RecipeId = () => {
           <div className="content container">
             <div className="left">
               <h1 className="titulo">{recipeId.title}</h1>
-              <span>Health Score {healthScore} </span>
-              <span>spoonacularScore {spoonacularScore} </span>
-              <span>aggregateLikes {aggregateLikes} </span>
-              <span>readyInMinutes {readyInMinutes} </span>
+              <span>Health {healthScore} </span>
+              <span>Score {spoonacularScore} </span>
+              <span>
+                Likes {createdInDb ? recipeId.likes : aggregateLikes}{" "}
+              </span>
+              <span>Time {readyInMinutes} </span>
+
               <div>
-                {diets&&diets.length > 0 &&
-                  diets.map((d, i) => <span key={i}>{d}, </span>)}
+                {createdInDb
+                  ? recipeId.TypeOfDiets.length > 0 &&
+                    recipeId.TypeOfDiets.map((d) => (
+                      <span key={d.id}>{d.name}, </span>
+                    ))
+                  : diets.map((d, i) => <span key={i}>{d}, </span>)}
               </div>
               <div>
-                 ingredientes: 
-                 {!createdInDb&&steps&&steps.length>0&&steps[0].map(s=>{
-                  s.ingredients.map(i=>(
-                     <p key={i.id}> {i.name} </p>
+                ingredientes:
+                {!createdInDb ?
+                  ingredients.map((e, i) => <span key={i}> {e}, </span>)
+                  :recipeId.ingredients.map((e,i)=>(
+                    <span key={i}> {e}, </span>
                   ))
-                  }) }
+                }
               </div>
             </div>
             <div className="right">
-              <div className='img'>
+              <div className="img">
                 <img src={image} alt="image" />
               </div>
             </div>
-            <p>{summary}</p>
-
+            <br />
+            <p dangerouslySetInnerHTML={{ __html: summary }} />
+            <br />
+            <div>
+              steps:
+              {!createdInDb
+                ? stepsAll.map((e, i) => (
+                    <p key={i}>
+                      {" "}
+                      {i + 1}-{e}{" "}
+                    </p>
+                  ))
+                : steps.map((e, i) => (
+                    <p key={i}>
+                      {" "}
+                      {i + 1}-{e}{" "}
+                    </p>
+                  ))}
+            </div>
           </div>
-
         </main>
         <footer className="page-footer">
           <div className="content">

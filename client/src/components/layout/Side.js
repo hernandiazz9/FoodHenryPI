@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 
 import Filters from "../filters";
+import SearchBar from "../searchBar";
 
 const Container = styled.div`
   position: sticky;
@@ -20,6 +21,7 @@ const Side = () => {
 
   return (
     <Container>
+      <SearchBar />
       <Filters />
     </Container>
   );

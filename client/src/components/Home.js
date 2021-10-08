@@ -16,7 +16,7 @@ const Container = styled.div`
     margin: 0 auto;
     max-width: 95%;
     height: 100vh;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 23% auto;
     grid-template-rows: 70px minmax(160px, auto) auto;
     grid-template-areas:
       "header header"
