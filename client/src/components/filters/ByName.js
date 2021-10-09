@@ -1,6 +1,27 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { orderByNameAction } from "../../actions";
+import styled from "styled-components";
+
+const Button = styled.div`
+  button {
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #ffffff;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: center;
+    transition: all 0.2s;
+    color: #00000071;
+    :hover {
+      color: #000000;
+      background-color: #ffffff;
+    }
+  }
+`;
 
 const ByName = () => {
   const dispatch = useDispatch();
@@ -9,18 +30,14 @@ const ByName = () => {
     setorder((o) => !o);
     dispatch(orderByNameAction(order));
   };
-  /*
-   PRECION BOTON DE ORDERBYNAME, 
-   GENERO UN DISPARCH A UN ACTION,   
-   GENERO UN TYPE ORDER_BY_NAME Y LE MANDO UN PAYLOAD DE ACENDE O DECEND
-   REALIZO LA ACTUALIZACION DE ALLRECIPES sort() o reverse()
-  */
+
+
   return (
-    <div>
+    <Button>
       <button type="button" onClick={onclick}>
-        Sort By Name {order ? "asc" : "desc"}
+        Name {order ? "asc" : "desc"}
       </button>
-    </div>
+    </Button>
   );
 };
 

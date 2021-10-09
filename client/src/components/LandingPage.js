@@ -3,7 +3,7 @@ import styled from "styled-components";
 import bgGif from "../img/bgGif.gif";
 const Container = styled.div`
   width: 100%;
-  height: 48.5vw;
+  height: 100vh;
   background-image: url(${bgGif});
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { filterRecipeAction, filterReset } from "../../actions";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+
+const Container = styled.ul`
+  font-size: 0.8rem;
+  color: #000000a9;
+  text-align: left;
+  line-height: 1.3rem;
+
+`;
 
 const ByDiets = ({ diets }) => {
   const dispatch = useDispatch();
@@ -24,10 +33,10 @@ const ByDiets = ({ diets }) => {
   };
 
   return (
-    <div>
+    <Container>
       {diets &&
         diets.map((e, i) => (
-          <div key={i}>
+          <li key={i}>
             <input
               type="checkbox"
               name={e.name}
@@ -35,9 +44,9 @@ const ByDiets = ({ diets }) => {
               onChange={onChange}
             />
             {e.name}
-          </div>
+          </li>
         ))}
-    </div>
+    </Container>
   );
 };
 

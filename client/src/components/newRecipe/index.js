@@ -28,7 +28,6 @@ const Container = styled.div`
       grid-template-areas:
         "header header"
         "head head"
-        "rigthbar rigthbar"
         "main main"
         "footer footer";
     }
@@ -36,13 +35,9 @@ const Container = styled.div`
   .page-header {
     grid-area: header;
   }
-  .page-head {
-    grid-area: head;
-  }
-  .page-rigthbar {
-    grid-area: rigthbar;
-    background-color: #e6e3dc;
-    border-radius: 12px;
+  .title{
+    font-size: 3rem;
+    color: #000000a4;
   }
   .page-main {
     grid-area: main;
@@ -78,8 +73,9 @@ const NewRecipe = () => {
             <Header />
           </div>
         </header>
-        <h1 className="page-head">Write your Recipe</h1>
+        
         <main class="page-main">
+        <h1 className="title">Write your Recipe</h1>
           <div class="content form">
             <Form  />
           </div>

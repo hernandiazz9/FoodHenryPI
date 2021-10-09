@@ -9,8 +9,11 @@ import InputIngredients from "./InputIngredients";
 
 const Container = styled.div`
   display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 1rem;
   .content {
-    width: 70%;
     .container-content {
       text-align: left;
       .sumary {
@@ -21,6 +24,8 @@ const Container = styled.div`
       }
       span {
         padding-right: 1rem;
+        font-size: 1.4em;
+        color: #0000009a;
       }
       .ingredients-steps {
         display: flex;
@@ -28,6 +33,8 @@ const Container = styled.div`
         .data {
           padding-top: 1rem;
           text-align: center;
+          font-size: 1.2rem;
+          color: #0000009a;
         }
       }
       .button-container {
@@ -36,18 +43,67 @@ const Container = styled.div`
       }
     }
   }
+  p{
+    font-size: 1.5em;
+    letter-spacing: 5px;
+    color: #000000c2;
+  }
   .side {
     width: 30%;
+
     text-align: center;
-    align-items: center;
-    margin: auto;
+    /* align-items: center; */
+    /* margin: auto; */
     span {
-      padding: 0rem 2rem 3rem 0rem;
+      color: #0000009a;
+      /* padding: 0rem 2rem 3rem 0rem; */
     }
-    .health{
-       margin-top: 1rem;
-       margin-bottom: 1rem;
-    }
+  }
+  .health {
+    padding-bottom: 1rem;
+  }
+`;
+const Input = styled.input`
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  color: #00000071;
+`;
+const TextArea = styled.textarea`
+  padding: 0.35em 3.3em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  color: #00000071;
+`;
+const Button = styled.button`
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  color: #00000071;
+  :hover {
+    color: #000000;
+    background-color: #ffffff;
   }
 `;
 const Form = () => {
@@ -55,11 +111,11 @@ const Form = () => {
     title: "",
     summary: "",
     healthScore: 0,
-    spoonacularScore:0,
+    spoonacularScore: 0,
     steps: [],
     image: "",
     ingredints: [],
-    aggregateLikes:0,
+    aggregateLikes: 0,
     readyInMinutes: 0,
     diets: [],
     createdInDb: true,
@@ -78,6 +134,7 @@ const Form = () => {
 
   const submit = (e) => {
     e.preventDefault();
+    if(!form.title||!form.summary) return 
     dispatch(createRecipeAction(form));
     setForm({
       title: "",
@@ -104,7 +161,7 @@ const Form = () => {
           <div className="container-content">
             <div>
               <span>Recipe Name</span>
-              <input
+              <Input
                 type="text"
                 size="60"
                 required
@@ -116,7 +173,7 @@ const Form = () => {
             </div>
             <div className="sumary">
               <span>Dish Sumary</span>
-              <textarea
+              <TextArea
                 onChange={onChange}
                 name="summary"
                 value={summary}
@@ -128,8 +185,21 @@ const Form = () => {
                 placeholder="Sumary..."
               />
             </div>
+
             <div className="ingredients-steps">
               <div>
+                <div className="health">
+                  <span>cookin time</span>
+                  <Input
+                    type="number"
+                    step="10"
+                    value={readyInMinutes}
+                    min="0"
+                    max="100"
+                    name="readyInMinutes"
+                    onChange={onChange}
+                  />
+                </div>
                 <span>Ingredients</span>
                 <InputIngredients setForm={setForm} />
                 <div className="data">
@@ -137,12 +207,24 @@ const Form = () => {
                     ingredients.length > 0 &&
                     ingredients.map((e, i) => (
                       <div key={i}>
-                        - {e} <button>x</button>
+                        - {e} 
                       </div>
                     ))}
                 </div>
               </div>
               <div>
+                <div className="health">
+                  <span>health score</span>
+                  <Input
+                    type="number"
+                    step="10"
+                    value={healthScore}
+                    min="0"
+                    max="100"
+                    name="healthScore"
+                    onChange={onChange}
+                  />
+                </div>
                 <span>Steps</span>
                 <InputSteps setForm={setForm} />
                 <div className="data">
@@ -150,48 +232,23 @@ const Form = () => {
                     steps.length > 0 &&
                     steps.map((e, i) => (
                       <div key={i}>
-                        {i + 1} - {e} <button>x</button>
+                        {i + 1} - {e} 
                       </div>
                     ))}
                 </div>
               </div>
             </div>
             <div className="button-container">
-              <button className="button-create" size="30" type="submit">
+              <Button style={{padding:'10px 8rem'}} className="button-create" size="60" type="submit">
                 Create
-              </button>
+              </Button>
             </div>
           </div>
         </div>
         <div className="side">
           <div className="container-content">
-            <h3>image</h3>
-            <input type="file"  />
-            <div className='health'>
-              <span>health score</span>
-              <input
-                type="number"
-                step="10"
-                value={healthScore}
-                min="0"
-                max="100"
-                name="healthScore"
-                onChange={onChange}
-              />
-            </div>
-            <div className='health'>
-              <span>cookin time</span>
-              <input
-                type="number"
-                step="10"
-                value={readyInMinutes}
-                min="0"
-                max="100"
-                name="readyInMinutes"
-                onChange={onChange}
-              />
-            </div>
-              <InputDiets form={form} setForm={setForm} />
+            <Input type="text" onChange={onChange} name='image' placeholder="Image URL" value={image}/>
+            <InputDiets form={form} setForm={setForm} />
           </div>
         </div>
       </Container>

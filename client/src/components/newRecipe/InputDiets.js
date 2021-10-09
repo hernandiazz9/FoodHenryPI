@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFiltersAction } from "../../actions";
+import styled from "styled-components";
 
+const Container = styled.div`
+  font-size: 1rem;
+  line-height: 1.8rem;
+  text-transform: capitalize;
+  padding: 1rem;
+  span{
+    margin: 1rem;
+  }
+`;
 const InputDiets = ({ setForm }) => {
   const dispatch = useDispatch();
   const { diets } = useSelector((state) => state);
@@ -28,17 +38,17 @@ const InputDiets = ({ setForm }) => {
     });
   };
   return (
-    <div>
-      &#128077;
+    <Container>
+      <p>Select Type of Diets:</p>
       {diets
         ? diets.map((e, i) => (
-            <label key={i}>
+            <span key={i}>
               <input type="checkbox" value={e.name} onChange={onChange} />
               {e.name}
-            </label>
+            </span>
           ))
         : "hola"}
-    </div>
+    </Container>
   );
 };
 

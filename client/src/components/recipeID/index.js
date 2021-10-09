@@ -7,6 +7,7 @@ import Header from "../layout/Header";
 import Footer from "../Footer";
 
 const Container = styled.div`
+    color: #000000c7;
   .grid {
     display: grid;
     margin: 0 auto;
@@ -66,7 +67,16 @@ const Container = styled.div`
     }
   }
   .titulo {
+    font-size: 3rem;
   }
+  span{
+    font-size: 1.4rem;
+  }
+  span .diets{
+    color: #0000003d;
+    letter-spacing: 4rem;
+  }
+  
   .img {
     position: sticky;
     top: 10px;
@@ -111,9 +121,6 @@ const RecipeId = () => {
     }
   }, [recipeId]);
 
-  console.log(recipeId, "/recipeId");
-
-  // console.log(recipeId.TypeOfDiets);
   return Object.keys(recipeId).length > 0 ? (
     <Container>
       <div className="grid">
@@ -126,29 +133,26 @@ const RecipeId = () => {
           <div className="content container">
             <div className="left">
               <h1 className="titulo">{recipeId.title}</h1>
-              <span>Health {healthScore} </span>
-              <span>Score {spoonacularScore} </span>
-              <span>
-                Likes {createdInDb ? recipeId.likes : aggregateLikes}{" "}
+              <span className=" subtle">
+                {healthScore} &#10084; &emsp; &emsp; &#128077;
+                {!createdInDb ? aggregateLikes : recipeId.likes} &emsp; &emsp;
+                &#128337;{readyInMinutes}&emsp; &emsp; &#9733;{spoonacularScore}{" "}
               </span>
-              <span>Time {readyInMinutes} </span>
-
               <div>
                 {createdInDb
                   ? recipeId.TypeOfDiets.length > 0 &&
                     recipeId.TypeOfDiets.map((d) => (
-                      <span key={d.id}>{d.name}, </span>
+                      <span className='diets' key={d.id}>{d.name}, </span>
                     ))
                   : diets.map((d, i) => <span key={i}>{d}, </span>)}
               </div>
               <div>
                 ingredientes:
-                {!createdInDb ?
-                  ingredients.map((e, i) => <span key={i}> {e}, </span>)
-                  :recipeId.ingredients.map((e,i)=>(
-                    <span key={i}> {e}, </span>
-                  ))
-                }
+                {!createdInDb
+                  ? ingredients.map((e, i) => <span key={i}> {e}, </span>)
+                  : recipeId.ingredients.map((e, i) => (
+                      <span key={i}> {e}, </span>
+                    ))}
               </div>
             </div>
             <div className="right">

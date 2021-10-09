@@ -13,6 +13,8 @@ const Card = ({ recipe }) => {
     image,
     title,
     createdInDb,
+    readyInMinutes,
+    spoonacularScore,
     id
   } = recipe;
   console.log(recipe, "/recipesssssss");
@@ -22,7 +24,7 @@ const Card = ({ recipe }) => {
         <div className="card-body">
           <span className="card-author subtle"> 
           {healthScore} &#10084; &emsp; &emsp; &#128077;
-          {!createdInDb ? aggregateLikes : recipe.likes}  </span>
+          {!createdInDb ? aggregateLikes : recipe.likes} &emsp; &emsp;  &#128337;{readyInMinutes}&emsp; &emsp; &#9733;{spoonacularScore} </span>
           <h2 className="card-title">{title}</h2>
           <span className="card-description subtle">
             {dishTypes && !createdInDb &&
