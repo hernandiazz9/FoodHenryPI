@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   font-size: 1rem;
-  line-height: 1.8rem;
+  line-height: 1.6rem;
   text-transform: capitalize;
   padding: 1rem;
   span{

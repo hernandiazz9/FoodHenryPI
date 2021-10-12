@@ -40,7 +40,9 @@ const InputSteps = ({ setForm }) => {
   };
   const onclick = (e) => {
     e.preventDefault();
+    if (step === "") return;
     setSteps((i) => [...i, step]);
+    setStep("");
   };
   useEffect(() => {
     setForm((e) => ({
@@ -50,7 +52,7 @@ const InputSteps = ({ setForm }) => {
   }, [steps]);
   return (
     <>
-      <Input onChange={onchange} type="text" />
+      <Input onChange={onchange} type="text" value={step} />
       <Button onClick={onclick} type="submit">
         add
       </Button>

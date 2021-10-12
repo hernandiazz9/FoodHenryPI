@@ -8,7 +8,6 @@ import styled from "styled-components";
 const Container = styled.div`
   .menu-bar {
     border-radius: 12px;
-
     background-color: #e6e3dc;
     display: flex;
     justify-content: space-around;

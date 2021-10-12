@@ -7,6 +7,12 @@ import styled from "styled-components";
 const Container = styled.div`
   .paginator {
     margin-top: 2rem;
+    position: relative;
+  }
+  .bar {
+    position: absolute;
+    bottom: 2rem;
+    left: 12rem;
   }
   button {
     display: inline-block;
@@ -31,6 +37,9 @@ const Container = styled.div`
     letter-spacing: 0.4rem;
     font-size: 2rem;
   }
+  .cards{
+    padding-bottom: 6rem;
+  }
 `;
 
 const Paginator = () => {
@@ -39,7 +48,7 @@ const Paginator = () => {
   const [allPage, setAllPage] = useState(1);
   const [currentRecipes, setCurrentRecipes] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState([]);
-  const recipePerPage = 3;
+  const recipePerPage = 5;
   // bottom numbers paginator
   useEffect(() => {
     const numberOfPages = [];
@@ -80,45 +89,53 @@ const Paginator = () => {
 
   return (
     <Container>
-      <Cards currentRecipes={currentRecipes} />
+      <div className='cards'>
+        <Cards currentRecipes={currentRecipes} />
+      </div>
       <div className="paginator">
-        <button onClick={before} disabled={actualPage === 1} type="button">
-          &laquo; Before
-        </button>
-        <button
-          onClick={() => setActualPage(1)}
-          disabled={actualPage === 1}
-          type="button"
-        >
-          1
-        </button>
-        <span className="dot"> . . . </span>
-        {numberOfPages.map(
-          (n, i) =>
-            n !== allPage &&
-            n !== 1 && (
-              <button
-                key={i}
-                disabled={actualPage === n}
-                onClick={() => setActualPage(n)}
-                type="button"
-              >
-                {n}
-              </button>
-            )
-        )}
-        <span className="dot"> . . . </span>
+        <div className="bar">
+          <button onClick={before} disabled={actualPage === 1} type="button">
+            &laquo; Before
+          </button>
+          <button
+            onClick={() => setActualPage(1)}
+            disabled={actualPage === 1}
+            type="button"
+          >
+            1
+          </button>
+          <span className="dot"> . . . </span>
+          {numberOfPages.map(
+            (n, i) =>
+              n !== allPage &&
+              n !== 1 && (
+                <button
+                  key={i}
+                  disabled={actualPage === n}
+                  onClick={() => setActualPage(n)}
+                  type="button"
+                >
+                  {n}
+                </button>
+              )
+          )}
+          <span className="dot"> . . . </span>
 
-        <button
-          onClick={() => setActualPage(allPage)}
-          disabled={actualPage === allPage}
-          type="button"
-        >
-          {allPage}
-        </button>
-        <button onClick={next} disabled={actualPage === allPage} type="button">
-          Next &raquo;
-        </button>
+          <button
+            onClick={() => setActualPage(allPage)}
+            disabled={actualPage === allPage}
+            type="button"
+          >
+            {allPage}
+          </button>
+          <button
+            onClick={next}
+            disabled={actualPage === allPage}
+            type="button"
+          >
+            Next &raquo;
+          </button>
+        </div>
       </div>
     </Container>
   );

@@ -10,21 +10,32 @@ const Container = styled.div`
   h2 {
     font-size: 1.7rem;
     position: absolute;
-    top: 23%;
+    top: 26%;
     left: 10%;
   }
   h1 {
-    font-size: 4rem;
+    font-size: 5rem;
     position: absolute;
     top: 28%;
     left: 9.5%;
   }
   .home {
     text-decoration: none;
-    font-size: 4rem;
+    font-size: 2rem;
     position: absolute;
     top: 49%;
-    left: 13%;
+    left: 20%;
+    color: white;
+    background-color: #ffffff60;
+    border-radius: .3rem;
+    padding: .1rem .4rem ;
+    cursor: pointer;
+    transition: all ease-in-out;
+
+    :hover{
+    font-size: 2.5rem;
+
+    }
     
   }
 `;

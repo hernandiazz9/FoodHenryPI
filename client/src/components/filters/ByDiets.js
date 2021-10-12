@@ -8,7 +8,16 @@ const Container = styled.ul`
   color: #000000a9;
   text-align: left;
   line-height: 1.3rem;
-
+  li{
+    font-size: 1rem;
+    color: #0000009d;
+    text-transform: capitalize;
+    list-style-type: disclosure-closed;
+  }
+  span{
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
 `;
 
 const ByDiets = ({ diets }) => {
@@ -37,13 +46,14 @@ const ByDiets = ({ diets }) => {
       {diets &&
         diets.map((e, i) => (
           <li key={i}>
+
             <input
               type="checkbox"
               name={e.name}
               value={e.name}
               onChange={onChange}
             />
-            {e.name}
+            <span>{e.name}</span>
           </li>
         ))}
     </Container>

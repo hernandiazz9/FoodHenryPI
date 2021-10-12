@@ -40,7 +40,9 @@ const InputIngredients = ({ setForm }) => {
   };
   const onclick = (e) => {
     e.preventDefault();
+    if(ingredient==='')return
     setIngredients((i) => [...i, ingredient]);
+    setIngredient('')
   };
   useEffect(() => {
     setForm((e) => ({
@@ -50,7 +52,7 @@ const InputIngredients = ({ setForm }) => {
   }, [ingredients]);
   return (
     <>
-      <Input onChange={onchange} type="text" />
+      <Input onChange={onchange} type="text" value={ingredient} />
       <Button onClick={onclick} type="submit">
         add
       </Button>

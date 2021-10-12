@@ -44,7 +44,7 @@ const Container = styled.div`
     margin-top: 1rem;
     p {
       font-size: 1.3rem;
-      margin-top: 0.1rem;
+      margin-top: 0.2rem;
       color: #0000007c;
     }
   }

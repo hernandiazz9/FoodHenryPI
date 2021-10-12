@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchRecipeAction } from "../../actions";
 import styled from "styled-components";
+import { useHistory } from 'react-router-dom'
+
 
 const Button = styled.div`
   button {
@@ -34,13 +36,14 @@ const Button = styled.div`
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-
+  const history = useHistory()
   const onChange = (e) => {
     setSearch(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
+    if(search==='')return
+    history.push('/home')
     dispatch(searchRecipeAction(search));
   };
 

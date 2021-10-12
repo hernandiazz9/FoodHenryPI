@@ -30,6 +30,7 @@ const Container = styled.div`
       .ingredients-steps {
         display: flex;
         justify-content: space-between;
+        /* flex-wrap: nowrap; */
         .data {
           padding-top: 1rem;
           text-align: center;
