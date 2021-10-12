@@ -4,18 +4,17 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Container = styled.ul`
-  font-size: 0.8rem;
   color: #000000a9;
   text-align: left;
   line-height: 1.3rem;
   li{
-    font-size: 1rem;
+    font-size: .8rem;
     color: #0000009d;
     text-transform: capitalize;
     list-style-type: disclosure-closed;
   }
-  span{
-    font-size: 1rem;
+  .diets{
+    font-size: 1.2em;
     padding-left: 1rem;
   }
 `;
@@ -53,7 +52,7 @@ const ByDiets = ({ diets }) => {
               value={e.name}
               onChange={onChange}
             />
-            <span>{e.name}</span>
+            <span className='diets'>{e.name}</span>
           </li>
         ))}
     </Container>

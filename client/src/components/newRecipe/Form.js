@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createRecipeAction } from "../../actions";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import InputDiets from "./InputDiets";
 import InputSteps from "./InputSteps";
@@ -44,7 +45,7 @@ const Container = styled.div`
       }
     }
   }
-  p{
+  p {
     font-size: 1.5em;
     letter-spacing: 5px;
     color: #000000c2;
@@ -132,10 +133,10 @@ const Form = () => {
     readyInMinutes,
     diets,
   } = form;
-
+  const history = useHistory();
   const submit = (e) => {
     e.preventDefault();
-    if(!form.title||!form.summary) return 
+    if (!form.title || !form.summary) return;
     dispatch(createRecipeAction(form));
     setForm({
       title: "",
@@ -147,6 +148,9 @@ const Form = () => {
       readyInMinutes: 0,
       diets: [],
     });
+    alert('Recipe created')
+    history.push("/home");
+
   };
 
   const onChange = (e) => {
@@ -206,11 +210,7 @@ const Form = () => {
                 <div className="data">
                   {ingredients &&
                     ingredients.length > 0 &&
-                    ingredients.map((e, i) => (
-                      <div key={i}>
-                        - {e} 
-                      </div>
-                    ))}
+                    ingredients.map((e, i) => <div key={i}>- {e}</div>)}
                 </div>
               </div>
               <div>
@@ -233,14 +233,19 @@ const Form = () => {
                     steps.length > 0 &&
                     steps.map((e, i) => (
                       <div key={i}>
-                        {i + 1} - {e} 
+                        {i + 1} - {e}
                       </div>
                     ))}
                 </div>
               </div>
             </div>
             <div className="button-container">
-              <Button style={{padding:'10px 8rem'}} className="button-create" size="60" type="submit">
+              <Button
+                style={{ padding: "10px 8rem" }}
+                className="button-create"
+                size="60"
+                type="submit"
+              >
                 Create
               </Button>
             </div>
@@ -248,7 +253,13 @@ const Form = () => {
         </div>
         <div className="side">
           <div className="container-content">
-            <Input type="text" onChange={onChange} name='image' placeholder="Image URL" value={image}/>
+            <Input
+              type="text"
+              onChange={onChange}
+              name="image"
+              placeholder="Image URL"
+              value={image}
+            />
             <InputDiets form={form} setForm={setForm} />
           </div>
         </div>
