@@ -49,6 +49,7 @@ const InputIngredients = ({ setForm }) => {
       ...e,
       ingredients,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ingredients]);
   return (
     <>

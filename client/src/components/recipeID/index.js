@@ -130,6 +130,7 @@ const RecipeId = () => {
   let { id } = useParams();
   useEffect(() => {
     dispatch(getRecipeByIdAction(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [ingredients, setIngredients] = useState([]);
   const [stepsAll, setStepsAll] = useState([]);
@@ -160,6 +161,7 @@ const RecipeId = () => {
       const allStep = steps[0].map((e) => e.step);
       setStepsAll(allStep);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipeId]);
 
   return Object.keys(recipeId).length > 0 ? (
@@ -196,7 +198,7 @@ const RecipeId = () => {
             </div>
             <div className="right">
               <div className="img">
-                <img src={image} alt="image" />
+                <img src={image} alt="recipe food" />
               </div>
             </div>
             <div className="steps-ingredients">

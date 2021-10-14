@@ -6,9 +6,8 @@ import Footer from "./Footer";
 import styled from "styled-components";
 import Paginator from "./paginator";
 
-import { useDispatch } from "react-redux";
-import { getRecipeAction } from "../actions";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipeAction, resetErrorAction } from "../actions";
 
 const Container = styled.div`
   .grid {
@@ -16,12 +15,12 @@ const Container = styled.div`
     margin: 0 auto;
     max-width: 95%;
     height: 100vh;
-    grid-template-columns: 23% auto;
-    grid-template-rows: 8% auto auto;
+    grid-template-columns: 380px auto;
+    grid-template-rows: 120px auto auto;
     grid-template-areas:
       "header header"
       "leftbar main"
-      "leftbar main" 
+      "leftbar main"
       "leftbar main"
       "footer footer";
     column-gap: 20px;
@@ -66,10 +65,18 @@ const Container = styled.div`
 `;
 
 const Home = () => {
+  const { error } = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRecipeAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(resetErrorAction())
+    }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error])
 
   return (
     <Container>

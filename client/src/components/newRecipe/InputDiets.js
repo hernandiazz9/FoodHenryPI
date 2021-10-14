@@ -18,12 +18,14 @@ const InputDiets = ({ setForm }) => {
   const [dietsSelected, setDietsSelected] = useState([]);
   useEffect(() => {
     dispatch(getFiltersAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     setForm((form) => ({
       ...form,
       diets: dietsSelected,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dietsSelected]);
 
   const onChange = (e) => {

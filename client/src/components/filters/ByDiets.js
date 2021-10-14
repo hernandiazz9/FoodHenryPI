@@ -26,6 +26,7 @@ const ByDiets = ({ diets }) => {
   useEffect(() => {
     dispatch(filterReset());
     if (dietsFilter.length > 0) dispatch(filterRecipeAction(dietsFilter));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dietsFilter]);
 
   const onChange = (e) => {
@@ -45,14 +46,17 @@ const ByDiets = ({ diets }) => {
       {diets &&
         diets.map((e, i) => (
           <li key={i}>
-
+            <label className='diets' htmlFor={e.id}>
             <input
-              type="checkbox"
-              name={e.name}
-              value={e.name}
-              onChange={onChange}
+            id={e.id}
+            type="checkbox"
+            name={e.name}
+            value={e.name}
+            onChange={onChange}
             />
-            <span className='diets'>{e.name}</span>
+            {e.name}
+
+            </label>
           </li>
         ))}
     </Container>

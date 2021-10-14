@@ -46,12 +46,12 @@ const Header = () => {
           
         </div>
         <div className="group">
-          <a className="item">
+          <div  className="item">
             <SearchBar />
-          </a>
-          <a className="item">
+          </div>
+          <div className="item">
             <Diets />
-          </a>
+          </div>
         </div>
       </nav>
     </Container>

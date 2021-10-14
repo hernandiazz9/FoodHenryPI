@@ -131,7 +131,6 @@ const Form = () => {
     image,
     ingredients,
     readyInMinutes,
-    diets,
   } = form;
   const history = useHistory();
   const submit = (e) => {

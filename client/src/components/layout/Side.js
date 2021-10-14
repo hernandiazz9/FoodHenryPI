@@ -30,6 +30,7 @@ const Side = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFiltersAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

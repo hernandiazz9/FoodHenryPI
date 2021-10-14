@@ -14,7 +14,9 @@ const Cards = ({currentRecipes}) => {
       ))}
     </div>
   ) : (
-    "cargando....."
+    <div>
+      <h2>No Recipe To Show, reload or delete filtes</h2>
+    </div>
   );
 };
 

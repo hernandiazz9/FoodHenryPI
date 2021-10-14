@@ -1,9 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import Header from "../layout/Header";
-import InputDiets from "./InputDiets";
-import InputSteps from "./InputSteps";
 import Form from "./Form";
 import Footer from "../Footer";
 

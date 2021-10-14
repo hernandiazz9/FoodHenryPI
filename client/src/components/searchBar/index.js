@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchRecipeAction } from "../../actions";
 import styled from "styled-components";
 import { useHistory } from 'react-router-dom'
 
 
-const Button = styled.div`
+const Container = styled.div`
   button {
     display: inline-block;
     padding: 0.35em 1.2em;
@@ -32,8 +32,13 @@ const Button = styled.div`
 
     padding: 0.35em 1.2em;
   }
+  span{
+    color: red;
+    display: block;
+  }
 `;
 const SearchBar = () => {
+  const { error } = useSelector(state => state)
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const history = useHistory()
@@ -43,17 +48,19 @@ const SearchBar = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if(search==='')return
-    history.push('/home')
     dispatch(searchRecipeAction(search));
+    setSearch('')
+    history.push('/home')
   };
 
   return (
-    <Button>
+    <Container>
       <form onSubmit={onSubmit}>
         <button type="submit" >search</button>
         <input type="search" onChange={onChange} placeholder='Search' size='18' name={search} />
+        {error&&<span>{error}</span>}
       </form>
-    </Button>
+    </Container>
   );
 };
 

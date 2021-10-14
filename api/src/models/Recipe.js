@@ -35,14 +35,14 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
     },
     likes: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       defaultValue:0,
     },
     readyInMinutes: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,

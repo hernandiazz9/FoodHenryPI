@@ -18,7 +18,8 @@ import {
   ORDER_BY_TIME_PREPARATION,
   GET_BY_ID_ERROR,
   GET_BY_ID_OKEY,
-  GET_BY_ID
+  GET_BY_ID,
+  RESET_ERROR
 } from "../types";
 
 export const getRecipeAction = () => {
@@ -63,10 +64,18 @@ const searchRecipes = () => ({
   type: SEARCH_RECIPES,
   payload: true,
 });
-const searchRecipesOKEY = (recipes) => ({
-  type: SEARCH_RECIPES_OKEY,
-  payload: recipes,
-});
+const searchRecipesOKEY = (recipes) => {
+  if (typeof recipes === "string") {
+    return {
+      type: SEARCH_RECIPES_ERROR,
+      payload: recipes,
+    };
+  }
+  return {
+    type: SEARCH_RECIPES_OKEY,
+    payload: recipes,
+  };
+};
 const searchRecipesError = (error) => ({
   type: SEARCH_RECIPES_ERROR,
   payload: error,
@@ -144,16 +153,14 @@ export const orderByTimePreparationAction = (order) => {
 
 export const createRecipeAction = (data) => {
   return async (dispatch) => {
-
     try {
       const post = await clienteAxios.post(`/recipe`, data);
-      console.log(post, 'createdd????');
+      console.log(post, "createdd????");
     } catch (error) {
       console.log(error);
     }
   };
 };
-
 
 export const getRecipeByIdAction = (id) => {
   return async (dispatch) => {
@@ -179,3 +186,8 @@ const getRecipeByIdError = (error) => ({
   type: GET_BY_ID_ERROR,
   payload: error,
 });
+
+
+ export const resetErrorAction = () => ({
+   type: RESET_ERROR
+ })

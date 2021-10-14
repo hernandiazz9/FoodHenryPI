@@ -18,6 +18,7 @@ import {
   GET_BY_ID_ERROR,
   GET_BY_ID_OKEY,
   GET_BY_ID,
+  RESET_ERROR
 } from "../types";
 
 const initialState = {
@@ -38,7 +39,7 @@ const todos = (state = initialState, action) => {
         ...state,
         loading: false,
         allRecipeBackUp: action.payload,
-        allRecipe: action.payload,
+        allRecipe: action.payload, 
       };
     case GET_RECIPES_ERROR:
       return { ...state, loading: false, error: action.payload };
@@ -133,6 +134,8 @@ const todos = (state = initialState, action) => {
       return { ...state, loading: false, recipeId: action.payload };
     case GET_BY_ID_ERROR:
       return { ...state, loading: false, error: action.payload };
+      case RESET_ERROR:
+        return { ...state, error:''}
     default:
       return state;
   }

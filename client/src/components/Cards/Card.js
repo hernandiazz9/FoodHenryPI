@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import "./card.css";
 
-const Container = styled.div``;
 const Card = ({ recipe }) => {
   const {
     aggregateLikes,
@@ -15,9 +13,8 @@ const Card = ({ recipe }) => {
     createdInDb,
     readyInMinutes,
     spoonacularScore,
-    id
   } = recipe;
-  console.log(recipe, "/recipesssssss");
+  // console.log(recipe, "/recipesssssss");
   return recipe ? (
     <div className="card-container">
       <div className="card u-clearfix">

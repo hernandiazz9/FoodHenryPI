@@ -49,6 +49,7 @@ const InputSteps = ({ setForm }) => {
       ...e,
       steps,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [steps]);
   return (
     <>

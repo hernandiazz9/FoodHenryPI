@@ -62,6 +62,7 @@ const Paginator = () => {
       indexOfLastPage
     );
     setNumberOfPages(currentNumbers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allPage, actualPage]);
   // Number of recipes
   useEffect(() => {
