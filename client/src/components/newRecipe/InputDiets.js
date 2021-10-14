@@ -4,12 +4,25 @@ import { getFiltersAction } from "../../actions";
 import styled from "styled-components";
 
 const Container = styled.div`
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1.6rem;
   text-transform: capitalize;
   padding: 1rem;
-  span{
-    margin: 1rem;
+  color: #00000096;
+  p {
+    color: #00000097;
+  }
+  label {
+    font-size: 1rem;
+    display: block;
+    background-color: #f7f7f7;
+    border-radius: 0.5rem;
+    transition: all ease-in-out 0.1s;
+    margin-bottom: 0.1rem;
+    :hover {
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
   }
 `;
 const InputDiets = ({ setForm }) => {
@@ -41,15 +54,15 @@ const InputDiets = ({ setForm }) => {
   };
   return (
     <Container>
-      <p>Select Type of Diets:</p>
+      <p>Select Type of Diets</p>
       {diets
         ? diets.map((e, i) => (
-            <span key={i}>
+            <label key={i}>
               <input type="checkbox" value={e.name} onChange={onChange} />
               {e.name}
-            </span>
+            </label>
           ))
-        : "hola"}
+        : "loading..."}
     </Container>
   );
 };

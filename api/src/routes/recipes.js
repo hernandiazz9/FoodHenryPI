@@ -24,7 +24,7 @@ const getDataDB = async () => {
 const getDataAPI = async () => {
   try {
     const api = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.apiKey}&addRecipeInformation=true&number=15`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.apiKey}&addRecipeInformation=true&number=100`
     );
     const data = api.data.results.map((e) => {
       const newDiets = [];

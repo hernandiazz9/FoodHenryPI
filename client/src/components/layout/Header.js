@@ -16,13 +16,12 @@ const Container = styled.div`
   .item {
     display: inline-block;
     box-sizing: border-box;
-    padding: 14px 20px;
+    padding: 20px 20px;
     text-decoration: none;
   }
   .recipe{
     color: black;
     font-size: 2rem;
-
   }
   .app{
     color: #00000065;

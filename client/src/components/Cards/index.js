@@ -1,22 +1,21 @@
 import React from "react";
-// import { useSelector } from "react-redux";
 import Card from "./Card";
+import styled from "styled-components";
 
+const NoRecipe = styled.h1`
+    font-size: 2.3rem;
+`;
 const Cards = ({currentRecipes}) => {
-  console.log(currentRecipes,'currentRecipes');
-
   return currentRecipes.length > 0 ? (
     <div>
       {currentRecipes.map((recipe) => (
-        <div key={recipe.id}>
+        <div  key={recipe.id}>
           <Card recipe={recipe} />
         </div>
       ))}
     </div>
   ) : (
-    <div>
-      <h2>No Recipe To Show, reload or delete filtes</h2>
-    </div>
+      <NoRecipe>No Recipe To Show, please WAIT, reload or delete filters</NoRecipe>
   );
 };
 

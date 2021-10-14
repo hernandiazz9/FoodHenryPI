@@ -8,14 +8,26 @@ const Container = styled.ul`
   text-align: left;
   line-height: 1.3rem;
   li{
-    font-size: .8rem;
-    color: #0000009d;
+    /* font-size: 1rem; */
+    color: #00000065;
     text-transform: capitalize;
     list-style-type: disclosure-closed;
+    margin: 5px 5px 5px 5px ;
   }
   .diets{
-    font-size: 1.2em;
+    font-size: 1.4em;
     padding-left: 1rem;
+    background-color: #f7f7f7b3;
+    padding-left:.4rem;
+    padding-right:.8rem;
+    padding: 3px 8px 3px 8px ;
+    border-radius: .5rem;
+    transition: all ease-in-out .1s;
+    :hover{
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #000000a0;
+    }
   }
 `;
 
@@ -46,9 +58,8 @@ const ByDiets = ({ diets }) => {
       {diets &&
         diets.map((e, i) => (
           <li key={i}>
-            <label className='diets' htmlFor={e.id}>
+            <label className='diets' >
             <input
-            id={e.id}
             type="checkbox"
             name={e.name}
             value={e.name}

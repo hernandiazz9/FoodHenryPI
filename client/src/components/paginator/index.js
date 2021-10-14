@@ -37,8 +37,12 @@ const Container = styled.div`
     letter-spacing: 0.4rem;
     font-size: 2rem;
   }
-  .cards{
+  .cards {
     padding-bottom: 6rem;
+  }
+  .active {
+    background-color: #00000099;
+    color: white;
   }
 `;
 
@@ -48,22 +52,24 @@ const Paginator = () => {
   const [allPage, setAllPage] = useState(1);
   const [currentRecipes, setCurrentRecipes] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState([]);
-  const recipePerPage = 5;
+  const recipePerPage = 6;
+
   // bottom numbers paginator
   useEffect(() => {
-    const numberOfPages = [];
-    if (allRecipe.length > 0 && numberOfPages.length === 0)
-      for (let i = 1; i <= allPage; i++) numberOfPages.push(i);
+    const numberOfPagess = [];
+    if (allRecipe.length > 0 && numberOfPagess.length === 0)
+      for (let i = 1; i <= allPage; i++) numberOfPagess.push(i);
     const indexOfFirstpage =
       actualPage >= allPage - 2 ? allPage - 3 : actualPage - 1;
     const indexOfLastPage = indexOfFirstpage + 4;
-    const currentNumbers = numberOfPages.slice(
+    const currentNumbers = numberOfPagess.slice(
       indexOfFirstpage,
       indexOfLastPage
     );
     setNumberOfPages(currentNumbers);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allPage, actualPage]);
+
   // Number of recipes
   useEffect(() => {
     const allPages = Math.ceil(allRecipe.length / recipePerPage);
@@ -90,18 +96,24 @@ const Paginator = () => {
 
   return (
     <Container>
-      <div className='cards'>
+      <div className="cards">
         <Cards currentRecipes={currentRecipes} />
       </div>
       <div className="paginator">
         <div className="bar">
-          <button onClick={before} disabled={actualPage === 1} type="button">
+          <button
+            onClick={before}
+            className={actualPage === 1 ? "active":undefined}
+            disabled={actualPage === 1}
+            type="button"
+          >
             &laquo; Before
           </button>
           <button
             onClick={() => setActualPage(1)}
             disabled={actualPage === 1}
             type="button"
+            className={actualPage === 1 ? "active":undefined}
           >
             1
           </button>
@@ -113,6 +125,7 @@ const Paginator = () => {
                 <button
                   key={i}
                   disabled={actualPage === n}
+                  className={actualPage === n ? "active":undefined}
                   onClick={() => setActualPage(n)}
                   type="button"
                 >
@@ -121,10 +134,11 @@ const Paginator = () => {
               )
           )}
           <span className="dot"> . . . </span>
-
           <button
             onClick={() => setActualPage(allPage)}
             disabled={actualPage === allPage}
+            className={actualPage === allPage ? "active" : undefined}
+
             type="button"
           >
             {allPage}
@@ -132,6 +146,7 @@ const Paginator = () => {
           <button
             onClick={next}
             disabled={actualPage === allPage}
+            className={actualPage === allPage ? "active" : undefined}
             type="button"
           >
             Next &raquo;
