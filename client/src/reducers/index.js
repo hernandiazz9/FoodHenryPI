@@ -18,7 +18,9 @@ import {
   GET_BY_ID_ERROR,
   GET_BY_ID_OKEY,
   GET_BY_ID,
-  RESET_ERROR
+  RESET_ERROR,
+  BY_ORIGIN,
+  BY_API
 } from "../types";
 
 const initialState = {
@@ -128,6 +130,14 @@ const todos = (state = initialState, action) => {
           }),
         ],
       };
+      case BY_ORIGIN:
+        return {
+          ...state,  allRecipe: action.payload ? [...state.allRecipe.filter(e=>e.createdInDb)] : [...state.allRecipeBackUp ]
+        }
+      case BY_API:
+        return {
+          ...state,  allRecipe: action.payload ? [...state.allRecipe.filter(e=>!e.createdInDb)] : [...state.allRecipeBackUp ]
+        }
     case GET_BY_ID:
       return { ...state, loading: action.payload };
     case GET_BY_ID_OKEY:

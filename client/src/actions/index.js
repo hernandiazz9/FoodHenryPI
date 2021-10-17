@@ -19,7 +19,9 @@ import {
   GET_BY_ID_ERROR,
   GET_BY_ID_OKEY,
   GET_BY_ID,
-  RESET_ERROR
+  RESET_ERROR,
+  BY_ORIGIN,
+  BY_API
 } from "../types";
 
 export const getRecipeAction = () => {
@@ -190,4 +192,14 @@ const getRecipeByIdError = (error) => ({
 
  export const resetErrorAction = () => ({
    type: RESET_ERROR
+ })
+
+
+ export const filterByOirigin = (order) =>({
+  type: BY_ORIGIN,
+  payload:order
+ })
+ export const filterByApi = (order) =>({
+  type: BY_API,
+  payload:order
  })

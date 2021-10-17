@@ -20,6 +20,8 @@ export const ORDER_BY_TIME_PREPARATION= 'ORDER_BY_TIME_PREPARATION'
 
 export const RESET_ERROR= 'RESET_ERROR'
 
+export const BY_ORIGIN= 'BY_ORIGIN'
+export const BY_API= 'BY_API'
 
 export const GET_FILTER= 'GET_FILTER'
 export const GET_FILTER_OKEY= 'GET_FILTER_OKEY'

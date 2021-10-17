@@ -6,6 +6,8 @@ import ByLikes from "../filters/ByLikes";
 import ByTimePreparation from "../filters/ByTimePreparation";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import ByOrigin from "./ByOrigin";
+import ByApi from "./ByApi";
 
 const Container = styled.div`
   display: flex;
@@ -73,6 +75,8 @@ const Filters = () => {
           <ByHealtScore />
           <ByLikes />
           <ByTimePreparation />
+          <ByOrigin />
+          <ByApi />
         </div>
       </div>
     </Container>
